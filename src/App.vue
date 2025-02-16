@@ -26,6 +26,24 @@ const rect = {
   height: "100px"
 }
 
+const carArr = ["car1", "car2", "car3"];
+
+// 많은 양의 데이터 반복 출력하기
+const members = [
+  {id: 1, name: "김유신"},
+  {id: 2, name: "강감찬"},
+  {id: 3, name: "이순신"},
+  {id: 4, name: "권율"},
+]
+
+const pop = (message) => {
+  window.alert(message);
+}
+
+const run = () => {
+  window.alert("run");
+};
+
 </script>
 
 <template>
@@ -83,4 +101,25 @@ const rect = {
 <!--  v-show는 display: 의 값에 따라 화면에 표시여부를 결정하기 때문에 템플릿 태그를 사용하여
       태그가 없이 문자열만 출력하면 화면에는 표시되지 않는다-->
   <template v-show="loading">로딩 중</template>
+
+<!--  반복 디렉티브-->
+  <br/>
+  <div v-for="f in carArr">{{f}}</div>
+
+<!--  아래와 같이 배열의 인덱스를 받아올 수도 있다-->
+  <br/>
+  <div v-for="(f, idx) in carArr">{{idx}} {{f}}</div>
+
+  <template v-for="f in carArr">{{f}}</template>
+
+<!--  많은 양의 데이터를 반복 출력할때 성능을 고려한 코드
+      각 항목의 고유한 값 여기서는 id를 key 속성의 값으로 지정하여 vue가 항목을 고유하게 구별할 수 있게한다-->
+  <li v-for="m in members" :key="m.id">{{m.name}}</li>
+
+  <br/>
+<!--  <button v-on:click="pop('hello')">Hello</button> v-on은 @으로 대체할 수 있다-->
+  <button @:click="pop('hello')">Hello</button>
+
+<!--  메서드에 인수가 없는 경우에는 메서드 이름만 입력해도 호출할 수 있다-->
+  <button @:click="run">Run</button>
 </template>

@@ -1,9 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import Join from "@/views/Join.vue";
+import Login from "@/views/Login.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/join',
+      // 정적 임포트
+      component: Join
+    },
+    {
+      path: '/login',
+      // 동적 임포트
+      component: () => import('../views/Login.vue')
+    },
     {
       path: '/',
       name: 'home',
@@ -16,7 +28,7 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
-    }
+    },
   ]
 })
 
